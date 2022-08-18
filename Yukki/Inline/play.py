@@ -213,7 +213,7 @@ def time_to_sec(time: str):
 
     return total_sec
 
-def stream_markup_timer(_, videoid, chat_id, played, dur):
+def primary_markup(videoid, user_id, current_time, total_time):
     played_sec = time_to_sec(played)
     total_sec = time_to_sec(dur)
 
@@ -250,7 +250,7 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
     return buttons
 
 
-def stream_markup_timer(_, videoid, chat_id, played, dur):
+def primary_markup(videoid, user_id, current_time, total_time):
     played_sec = time_to_sec(played)
     total_sec = time_to_sec(dur)
 
@@ -287,7 +287,7 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
     return buttons
 
 
-def stream_markup_timer(_, videoid, chat_id, played, dur):
+def primary_markup(videoid, user_id, current_time, total_time):
     played_sec = time_to_sec(played)
     total_sec = time_to_sec(dur)
 
@@ -319,7 +319,7 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
     return buttons
 
 
-def stream_markup_timer(_, videoid, chat_id, played, dur):
+def primary_markup(videoid, user_id, current_time, total_time):
     played_sec = time_to_sec(played)
     total_sec = time_to_sec(dur)
 
