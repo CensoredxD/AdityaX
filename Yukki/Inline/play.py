@@ -196,33 +196,6 @@ def secondary_markup2(videoid, user_id):
     return buttons
 
 
-def primary_markup(videoid, user_id, current_time, total_time):
-    if videoid not in db_mem:
-        db_mem[videoid] = {}
-    db_mem[videoid]["check"] = 2
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
-            )
-        ],
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
-            ),
-            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
-        ],
-    ]
-    return buttons
-
-
 def time_to_sec(time: str):
     x = time.split(":")
 
@@ -277,15 +250,62 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
     return buttons
 
 
-def audio_markup(videoid, user_id, current_time, total_time):
-    if videoid not in db_mem:
-        db_mem[videoid] = {}
-    db_mem[videoid]["check"] = 2
+def stream_markup_timer(_, videoid, chat_id, played, dur):
+    played_sec = time_to_sec(played)
+    total_sec = time_to_sec(dur)
+
+    x, y = str(round(played_sec/total_sec,1)).split(".")
+    pos = int(y)
+
+    line = "—"
+    circle = "❀"
+
+    bar = line*(pos-1)
+    bar += circle
+    bar += line*(10-len(bar))
+
     buttons = [
         [
             InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
+                text=f"{played} {bar} {dur}",
+                callback_data="GetTimer",
+            )
+        ],
+        [
+            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
+            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
+            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
+            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
+            ),
+            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
+        ],
+    ]
+    return buttons
+
+
+def stream_markup_timer(_, videoid, chat_id, played, dur):
+    played_sec = time_to_sec(played)
+    total_sec = time_to_sec(dur)
+
+    x, y = str(round(played_sec/total_sec,1)).split(".")
+    pos = int(y)
+
+    line = "—"
+    circle = "❀"
+
+    bar = line*(pos-1)
+    bar += circle
+    bar += line*(10-len(bar))
+
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text=f"{played} {bar} {dur}",
+                callback_data="GetTimer",
             )
         ],
         [
@@ -299,12 +319,25 @@ def audio_markup(videoid, user_id, current_time, total_time):
     return buttons
 
 
-def audio_timer_markup_start(videoid, user_id, current_time, total_time):
+def stream_markup_timer(_, videoid, chat_id, played, dur):
+    played_sec = time_to_sec(played)
+    total_sec = time_to_sec(dur)
+
+    x, y = str(round(played_sec/total_sec,1)).split(".")
+    pos = int(y)
+
+    line = "—"
+    circle = "❀"
+
+    bar = line*(pos-1)
+    bar += circle
+    bar += line*(10-len(bar))
+
     buttons = [
         [
             InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
+                text=f"{played} {bar} {dur}",
+                callback_data="GetTimer",
             )
         ],
         [
