@@ -214,8 +214,8 @@ def time_to_sec(time: str):
     return total_sec
 
 def primary_markup(videoid, user_id, current_time, total_time):
-    played_sec = time_to_sec(played)
-    total_sec = time_to_sec(dur)
+    played_sec = time_to_sec(Current_time)
+    total_sec = time_to_sec(total_time)
 
     x, y = str(round(played_sec/total_sec,1)).split(".")
     pos = int(y)
@@ -230,7 +230,7 @@ def primary_markup(videoid, user_id, current_time, total_time):
     buttons = [
         [
             InlineKeyboardButton(
-                text=f"{played} {bar} {dur}",
+                text=f"{current_time} {bar} {total_time}",
                 callback_data="GetTimer",
             )
         ],
